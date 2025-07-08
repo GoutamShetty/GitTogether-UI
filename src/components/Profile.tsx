@@ -4,13 +4,15 @@
  */
 
 import React from "react";
+import EditProfile from "./EditProfile";
+import { useSelector } from "react-redux";
 
 interface IProps {}
 
 const Profile: React.FC<IProps> = (props) => {
-  const {} = props;
+  const user = useSelector((store: any) => store.user);
 
-  return <></>;
+  return <>{user && <EditProfile user={user} />}</>;
 };
 
 export default Profile;

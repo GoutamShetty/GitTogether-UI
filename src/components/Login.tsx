@@ -13,6 +13,11 @@ import { BASE_URL } from "../utils/constants";
 const Login: React.FC = () => {
   const [emailId, setEmailId] = useState("");
   const [password, setPassword] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [error, setError] = useState(null);
+  const [isLoginForm, setIsLoginForm] = useState(true);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -26,10 +31,29 @@ const Login: React.FC = () => {
         },
         { withCredentials: true }
       );
-      dispatch(addUser(res.data.data));
+      dispatch(addUser(res.data?.data));
       navigate("/");
-    } catch (error) {
-      console.error(error);
+    } catch (error: any) {
+      setError(error?.response?.data ?? "Something went wrong");
+    }
+  };
+
+  const handleSignup = async () => {
+    try {
+      const res = await axios.post(
+        BASE_URL + "/signup",
+        {
+          firstName,
+          lastName,
+          emailId,
+          password,
+        },
+        { withCredentials: true }
+      );
+      dispatch(addUser(res.data?.data));
+      navigate("/profile");
+    } catch (error: any) {
+      setError(error?.response?.data ?? "Something went wrong");
     }
   };
 
@@ -37,7 +61,65 @@ const Login: React.FC = () => {
     <div className="flex justify-center my-10">
       <div className="card bg-neutral text-neutral-content w-96">
         <div className="card-body items-center text-center">
-          <h2 className="card-title my-4">Login</h2>
+          <h2 className="card-title my-4">
+            {isLoginForm ? "Login" : "Sign Up"}
+          </h2>
+
+          {!isLoginForm && (
+            <>
+              <label className="input validator my-2">
+                <svg
+                  className="h-[1em] opacity-50"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                >
+                  <g
+                    strokeLinejoin="round"
+                    strokeLinecap="round"
+                    strokeWidth="2.5"
+                    fill="none"
+                    stroke="currentColor"
+                  >
+                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                  </g>
+                </svg>
+                <input
+                  type="text"
+                  required
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  placeholder="First name"
+                />
+              </label>
+
+              <label className="input validator my-2">
+                <svg
+                  className="h-[1em] opacity-50"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                >
+                  <g
+                    strokeLinejoin="round"
+                    strokeLinecap="round"
+                    strokeWidth="2.5"
+                    fill="none"
+                    stroke="currentColor"
+                  >
+                    <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="12" cy="7" r="4"></circle>
+                  </g>
+                </svg>
+                <input
+                  type="text"
+                  required
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  placeholder="Last name"
+                />
+              </label>
+            </>
+          )}
 
           <label className="input validator my-2">
             <svg
@@ -102,11 +184,24 @@ const Login: React.FC = () => {
             At least one uppercase letter
           </p>
 
+          {error && <p className="text-red-500">{error}</p>}
           <div className="card-actions justify-center my-4">
-            <button className="btn btn-primary" onClick={handleLogin}>
-              Login
+            <button
+              className="btn btn-primary"
+              onClick={isLoginForm ? handleLogin : handleSignup}
+            >
+              {isLoginForm ? "Login" : "Sign Up"}
             </button>
           </div>
+
+          <p
+            className="m-auto cursor-pointer py-2"
+            onClick={() => setIsLoginForm((value) => !value)}
+          >
+            {isLoginForm
+              ? "New user? Signup here"
+              : "Existing user? Login here"}
+          </p>
         </div>
       </div>
     </div>
