@@ -10,9 +10,10 @@ import { BASE_URL } from "../utils/constants";
 import { addUser } from "../utils/userSlice";
 import UserCard from "./UserCard";
 import SuccessToast from "./SuccessToast";
+import type { User } from "../types/common";
 
 interface IProps {
-  user: any;
+  user: User;
 }
 
 const EditProfile: React.FC<IProps> = (props) => {
@@ -151,7 +152,7 @@ const EditProfile: React.FC<IProps> = (props) => {
         </div>
       </div>
 
-      <UserCard user={user} />
+      <UserCard user={user} disabled />
       {showToast && <SuccessToast msg="Profile saved successfully" />}
     </div>
   );

@@ -47,7 +47,7 @@ const Requests: React.FC = () => {
 
   return (
     <div className="text-center my-10">
-      <h1 className="text-bold text-white text-3xl">Connections</h1>
+      <h1 className="text-bold text-white text-3xl">Requests</h1>
 
       {requests?.map((request: any) => {
         const { _id, firstName, lastName, photoUrl, age, gender, about } =
@@ -60,7 +60,7 @@ const Requests: React.FC = () => {
             <div>
               <img
                 alt="photo"
-                className="w-20 h-20 rounded-full"
+                className="w-80 h-30 rounded-full"
                 src={photoUrl}
               />
             </div>
@@ -71,7 +71,7 @@ const Requests: React.FC = () => {
               {age && gender && <p>{age + " " + gender}</p>}
               <p>{about}</p>
             </div>
-            <div>
+            <div className="flex">
               <button
                 className="btn btn-primary mx-2"
                 onClick={() => reviewRequest("rejected", request._id)}

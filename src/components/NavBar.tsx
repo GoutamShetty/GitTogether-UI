@@ -28,9 +28,22 @@ const NavBar: React.FC = () => {
   return (
     <div className="navbar bg-base-300 shadow-sm">
       <div className="flex-1">
-        <Link to="/" className="btn btn-ghost text-xl">
-          DevTinder
-        </Link>
+        <div className="flex items-center">
+          <div className="avatar">
+            <div className="w-16 rounded">
+              <img src="../public/logo-connection.webp" />
+            </div>
+          </div>
+          <div className="ml-2">
+            <Link
+              to="/"
+              className="btn btn-ghost text-start text-xl text-primary p-0"
+            >
+              GitTogether
+            </Link>
+            <div className="text-secondary">Where Developers Git Together</div>
+          </div>
+        </div>
       </div>
       {user && (
         <div className="flex items-center">

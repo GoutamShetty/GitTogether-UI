@@ -8,13 +8,15 @@ import React from "react";
 import { BASE_URL } from "../utils/constants";
 import { useDispatch } from "react-redux";
 import { removeUserFromFeed } from "../utils/feedSlice";
+import type { User } from "../types/common";
 
 interface IProps {
-  user: any;
+  user: User;
+  disabled?: boolean;
 }
 
 const UserCard: React.FC<IProps> = (props) => {
-  const { user } = props;
+  const { user, disabled } = props;
   const dispatch = useDispatch();
 
   const handleSendRequest = async (status: string, userId: string) => {
@@ -42,12 +44,14 @@ const UserCard: React.FC<IProps> = (props) => {
         <div className="card-actions justify-center my-4">
           <button
             className="btn btn-secondary"
+            disabled={disabled}
             onClick={() => handleSendRequest("ignored", user?._id)}
           >
             Ignore
           </button>
           <button
             className="btn btn-primary"
+            disabled={disabled}
             onClick={() => handleSendRequest("interested", user?._id)}
           >
             Interested

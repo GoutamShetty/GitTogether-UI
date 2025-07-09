@@ -8,6 +8,7 @@ import React, { useEffect } from "react";
 import { BASE_URL } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { addConnections } from "../utils/connectionSlice";
+import type { User } from "../types/common";
 
 const Connections: React.FC = () => {
   const dispatch = useDispatch();
@@ -36,7 +37,7 @@ const Connections: React.FC = () => {
     <div className="text-center my-10">
       <h1 className="text-bold text-white text-3xl">Connections</h1>
 
-      {connections?.map((connection: any) => {
+      {connections?.map((connection: User) => {
         const { _id, firstName, lastName, photoUrl, age, gender, about } =
           connection;
         return (
@@ -47,7 +48,7 @@ const Connections: React.FC = () => {
             <div>
               <img
                 alt="photo"
-                className="w-20 h-20 rounded-full"
+                className="w-80 h-30 rounded-full"
                 src={photoUrl}
               />
             </div>
