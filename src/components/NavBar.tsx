@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
 import { removeUser } from "../utils/userSlice";
+import logo from "../assets/logo-connection.webp";
 
 const NavBar: React.FC = () => {
   const user = useSelector((store: any) => store.user);
@@ -31,7 +32,7 @@ const NavBar: React.FC = () => {
         <div className="flex items-center">
           <div className="avatar">
             <div className="w-16 rounded">
-              <img src="../public/logo-connection.webp" />
+              <img src={logo} />
             </div>
           </div>
           <div className="ml-2">
