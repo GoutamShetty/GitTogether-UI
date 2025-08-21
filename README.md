@@ -188,6 +188,14 @@ VITE_GITHUB_CLIENT_ID=your_github_client_id
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
+## 📄 License
+
+This project is licensed under the ISC License.
+
+## 👤 Author
+
+Goutam Shetty
+
 ### Contribution Guidelines
 
 - Follow the existing code style
