@@ -43,6 +43,7 @@ const Connections: React.FC = () => {
         emptyTitle="No Connections Found"
         isLoading={loading}
         data={connections}
+        noHeight
       >
         {connections?.map((connection: User) => {
           const { _id, firstName, lastName, photoUrl, age, gender, about } =
@@ -52,7 +53,7 @@ const Connections: React.FC = () => {
               key={_id}
               className="flex m-4 p-4 rounded-lg bg-base-300 w-1/2 mx-auto justify-between"
             >
-              <div className="flex">
+              <div className="flex items-center">
                 <img
                   alt="photo"
                   className="w-30 h-30 rounded-full"
@@ -66,9 +67,11 @@ const Connections: React.FC = () => {
                   <p>{about}</p>
                 </div>
               </div>
-              <Link to={`/chat/${_id}`}>
-                <button className="btn btn-primary justify-end">Chat</button>
-              </Link>
+              <div className="flex items-center">
+                <Link to={`/chat/${_id}`}>
+                  <button className="btn btn-primary justify-end">Chat</button>
+                </Link>
+              </div>
             </div>
           );
         })}

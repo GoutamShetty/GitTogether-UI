@@ -35,12 +35,16 @@ const UserCard: React.FC<IProps> = (props) => {
   return (
     <div className="card bg-base-300 w-96 shadow-sm">
       <figure className="mt-2">
-        <img src={user?.photoUrl} alt="img" />
+        <img height={350} width={350} src={user?.photoUrl} alt="img" />
       </figure>
       <div className="card-body">
         <h2 className="card-title">{`${user?.firstName} ${user?.lastName}`}</h2>
         {user?.age && user?.gender && <p>{user?.age + " " + user?.gender}</p>}
-        <p>{user?.about}</p>
+        {user?.about ? (
+          <p>{user?.about}</p>
+        ) : (
+          <p className="text-sm text-gray-500">No bio</p>
+        )}
         <div className="card-actions justify-center my-4">
           <button
             className="btn btn-secondary"

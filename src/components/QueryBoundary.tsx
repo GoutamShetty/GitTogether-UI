@@ -10,10 +10,17 @@ interface IProps {
   isLoading: boolean;
   data?: any;
   emptyTitle: string;
+  noHeight?: boolean;
 }
 
 const QueryBoundary: React.FC<PropsWithChildren<IProps>> = (props) => {
-  const { data, children, emptyTitle, isLoading = false } = props;
+  const {
+    data,
+    children,
+    emptyTitle,
+    isLoading = false,
+    noHeight = false,
+  } = props;
 
   if (data && data?.length === 0) {
     return (
@@ -33,10 +40,18 @@ const QueryBoundary: React.FC<PropsWithChildren<IProps>> = (props) => {
   }
 
   if (isLoading) {
-    return <span className="loading loading-bars loading-xl" />;
+    return (
+      <div className="h-[calc(100vh-132px)] flex items-center justify-center">
+        <span className="loading loading-bars loading-xl" />
+      </div>
+    );
   }
 
-  return <>{children}</>;
+  return (
+    <div className={noHeight ? "" : "h-[calc(100vh-132px)] overflow-auto"}>
+      {children}
+    </div>
+  );
 };
 
 export default QueryBoundary;

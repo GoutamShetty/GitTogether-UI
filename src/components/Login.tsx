@@ -60,7 +60,13 @@ const Login: React.FC = () => {
   return (
     <div className="flex justify-center my-10">
       <div className="card bg-neutral text-neutral-content w-96">
-        <div className="card-body items-center text-center">
+        <form
+          className="card-body items-center text-center"
+          onSubmit={(e) => {
+            e.preventDefault();
+            isLoginForm ? handleLogin() : handleSignup();
+          }}
+        >
           <h2 className="card-title my-4">
             {isLoginForm ? "Login" : "Sign Up"}
           </h2>
@@ -186,10 +192,7 @@ const Login: React.FC = () => {
 
           {error && <p className="text-red-500">{error}</p>}
           <div className="card-actions justify-center my-4">
-            <button
-              className="btn btn-primary"
-              onClick={isLoginForm ? handleLogin : handleSignup}
-            >
+            <button type="submit" className="btn btn-primary">
               {isLoginForm ? "Login" : "Sign Up"}
             </button>
           </div>
@@ -202,7 +205,7 @@ const Login: React.FC = () => {
               ? "New user? Signup here"
               : "Existing user? Login here"}
           </p>
-        </div>
+        </form>
       </div>
     </div>
   );

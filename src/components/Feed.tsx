@@ -41,6 +41,7 @@ const Feed: React.FC = () => {
     <div className="flex justify-center my-10">
       <QueryBoundary
         emptyTitle="No users found"
+        noHeight
         isLoading={loading}
         data={feed}
       >

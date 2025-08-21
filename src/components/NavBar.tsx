@@ -16,9 +16,14 @@ const NavBar: React.FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const handleCloseDropdown = () => {
+    (document.activeElement as HTMLElement)?.blur();
+  };
+
   const handleLogout = async () => {
     try {
       await axios.post(BASE_URL + "/logout", {}, { withCredentials: true });
+      handleCloseDropdown();
       dispatch(removeUser());
       navigate("/login");
     } catch (error) {
@@ -30,20 +35,21 @@ const NavBar: React.FC = () => {
     <div className="navbar bg-base-300 shadow-sm">
       <div className="flex-1">
         <div className="flex items-center">
-          <div className="avatar">
-            <div className="w-16 rounded">
-              <img src={logo} />
+          <Link to="/" className="flex">
+            <div className="avatar">
+              <div className="w-16 rounded">
+                <img src={logo} />
+              </div>
             </div>
-          </div>
-          <div className="ml-2">
-            <Link
-              to="/"
-              className="btn btn-ghost text-start text-xl text-primary p-0"
-            >
-              GitTogether
-            </Link>
-            <div className="text-secondary">Where Developers Git Together</div>
-          </div>
+            <div className="ml-2 flex flex-col items-start justify-center">
+              <div className="text-start text-xl text-primary p-0 font-bold">
+                GitTogether
+              </div>
+              <div className="text-secondary">
+                Where Developers Git Together
+              </div>
+            </div>
+          </Link>
         </div>
       </div>
       {user && (
@@ -70,18 +76,28 @@ const NavBar: React.FC = () => {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
             >
               <li>
-                <Link to="/profile" className="justify-between">
+                <Link
+                  to="/profile"
+                  className="justify-between"
+                  onClick={handleCloseDropdown}
+                >
                   Profile
                 </Link>
               </li>
               <li>
-                <Link to="/connections">Connections</Link>
+                <Link to="/connections" onClick={handleCloseDropdown}>
+                  Connections
+                </Link>
               </li>
               <li>
-                <Link to="/requests">Requests</Link>
+                <Link to="/requests" onClick={handleCloseDropdown}>
+                  Requests
+                </Link>
               </li>
               <li>
-                <Link to="/premium">Premium</Link>
+                <Link to="/premium" onClick={handleCloseDropdown}>
+                  Premium
+                </Link>
               </li>
               <li>
                 <a onClick={handleLogout}>Logout</a>

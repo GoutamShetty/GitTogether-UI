@@ -54,6 +54,7 @@ const Requests: React.FC = () => {
         emptyTitle="No Requests Found"
         isLoading={loading}
         data={requests}
+        noHeight
       >
         {requests?.map((request: any) => {
           const { _id, firstName, lastName, photoUrl, age, gender, about } =
@@ -63,19 +64,19 @@ const Requests: React.FC = () => {
               key={_id}
               className="flex justify-between items-center m-4 p-4 rounded-lg bg-base-300 w-2/3 mx-auto"
             >
-              <div>
+              <div className="flex items-center">
                 <img
                   alt="photo"
-                  className="w-80 h-30 rounded-full"
+                  className="w-30 h-30 rounded-full"
                   src={photoUrl}
                 />
-              </div>
-              <div className="text-left mx-4">
-                <h2 className="font-bold text-xl">
-                  {firstName + " " + lastName}
-                </h2>
-                {age && gender && <p>{age + " " + gender}</p>}
-                <p>{about}</p>
+                <div className="text-left mx-4">
+                  <h2 className="font-bold text-xl">
+                    {firstName + " " + lastName}
+                  </h2>
+                  {age && gender && <p>{age + " " + gender}</p>}
+                  <p>{about}</p>
+                </div>
               </div>
               <div className="flex">
                 <button

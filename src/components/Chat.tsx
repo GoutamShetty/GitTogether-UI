@@ -85,35 +85,45 @@ const Chat: React.FC = () => {
 
   return (
     <div className="w-3/4 mx-auto border border-gray-600 m-5 h-[70vh] flex flex-col">
-      <h1 className="p-5 border-b border-gray-600">Chat</h1>
+      <h1 className="p-5 border-b border-gray-600">
+        Chat with {messages[0]?.firstName} {messages[0]?.lastName}
+      </h1>
       <div className="flex-1 overflow-scroll p-5">
-        {messages.map((message, index) => (
-          <div
-            key={index}
-            className={`chat ${
-              message?.userId === user?._id ? "chat-end" : "chat-start"
-            }`}
-          >
-            <div className="chat-image avatar">
-              <div className="w-10 rounded-full">
-                <img
-                  alt="Tailwind CSS chat bubble component"
-                  src={message?.photoUrl}
-                />
+        {messages.length > 0 ? (
+          messages.map((message, index) => (
+            <div
+              key={index}
+              className={`chat ${
+                message?.userId === user?._id ? "chat-end" : "chat-start"
+              }`}
+            >
+              <div className="chat-image avatar">
+                <div className="w-10 rounded-full">
+                  <img
+                    alt="Tailwind CSS chat bubble component"
+                    src={message?.photoUrl}
+                  />
+                </div>
+              </div>
+              <div className="chat-header">
+                {`${message?.firstName} ${message?.lastName}`}
+                <time className="text-xs opacity-50">
+                  {new Date(message?.createdAt).toLocaleTimeString()}
+                </time>
+              </div>
+              <div className="chat-bubble">{message?.text}</div>
+              <div className="chat-footer opacity-50">
+                {new Date(message?.createdAt).toLocaleDateString()}
               </div>
             </div>
-            <div className="chat-header">
-              {`${message?.firstName} ${message?.lastName}`}
-              <time className="text-xs opacity-50">
-                {new Date(message?.createdAt).toLocaleTimeString()}
-              </time>
-            </div>
-            <div className="chat-bubble">{message?.text}</div>
-            <div className="chat-footer opacity-50">
-              {new Date(message?.createdAt).toLocaleDateString()}
-            </div>
+          ))
+        ) : (
+          <div className="flex justify-center items-center h-full">
+            <p className="text-gray-500">
+              No messages yet. Start a conversation by sending a message.
+            </p>
           </div>
-        ))}
+        )}
       </div>
 
       <div className="p-5 border-t border-gray-600 flex items-center gap-2">
@@ -121,6 +131,11 @@ const Chat: React.FC = () => {
           className="flex-1 border border-gray-500 text-white rounded p-2"
           value={newMessage}
           onChange={(e) => setNewMessage(e.target.value)}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" && newMessage.trim()) {
+              handleSendMessage();
+            }
+          }}
         />
         <button className="btn btn-secondary" onClick={handleSendMessage}>
           Send

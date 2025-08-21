@@ -134,9 +134,10 @@ const EditProfile: React.FC<IProps> = (props) => {
                   <span className="label-text">About:</span>
                 </div>
                 <textarea
-                  className="textarea h-24"
+                  className="textarea"
                   placeholder="Bio"
                   value={about}
+                  rows={5}
                   onChange={(e) => setAbout(e.target.value)}
                 />
               </label>
