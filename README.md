@@ -195,36 +195,11 @@ VITE_GITHUB_CLIENT_ID=your_github_client_id
 - Update documentation as needed
 - Follow semantic commit messages
 
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 👥 Authors
-
-- **Goutam Shetty** - _Initial work_ - [goutam.shetty@314ecorp.com]
-
 ## 🙏 Acknowledgments
 
 - Inspired by modern social networking platforms
 - Built with developer experience in mind
 - Special thanks to the open-source community
-
-## 📚 Documentation
-
-For detailed documentation, please visit:
-
-- [API Documentation](docs/api.md)
-- [Component Documentation](docs/components.md)
-- [Contributing Guidelines](CONTRIBUTING.md)
-- [Change Log](CHANGELOG.md)
-
-## 🆘 Support
-
-For support, please:
-
-1. Check the [Documentation](docs/)
-2. Open an [Issue](issues/new)
-3. Contact the development team
 
 ---
 
